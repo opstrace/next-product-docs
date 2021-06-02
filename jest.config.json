@@ -1,0 +1,5 @@
+{
+  "setupFilesAfterEnv": ["./setupTests.js"],
+  "collectCoverage": true,
+  "testRegex": "((\\.|/*.)(test))\\.js?$"
+}

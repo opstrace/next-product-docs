@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep package.json && npm install
