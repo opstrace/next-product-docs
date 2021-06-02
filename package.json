@@ -18,6 +18,7 @@
   ],
   "main": "dist/index.js",
   "scripts": {
+    "prepare": "husky install",
     "build": "rm -rf ./dist && rollup -c rollup.config.js",
     "style": "prettier --write \"./**/*.{js,jsx,json}\"",
     "lint": "eslint --fix . --ext .js --ext .jsx --ext md --ext mdx",
