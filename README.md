@@ -3,7 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://semantic-release.gitbook.io/semantic-release/"><img alt="Semantic Release bagde" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg"></a>
+  <a href="https://github.com/opstrace/next-product-docs/actions/workflows/publish.yml"><img alt="test status" src="https://github.com/opstrace/next-product-docs/actions/workflows/publish.yml/badge.svg" /></a>
+  <a href="https://github.com/opstrace/next-product-docs/actions/workflows/test.yml"><img alt="test status" src="https://github.com/opstrace/next-product-docs/actions/workflows/test.yml/badge.svg" /></a>
+  <a href="https://semantic-release.gitbook.io/semantic-release/"><img alt="Semantic Release bagde" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" /></a>
 </p>
 
 # Next.js Component for Product Docs
