@@ -20,6 +20,7 @@
   "scripts": {
     "prepare": "husky install",
     "build": "rollup -c rollup.config.js",
+    "watch": "watch 'npm run build' ./src",
     "style": "prettier --write \"./**/*.{js,jsx,json}\"",
     "lint": "eslint --fix . --ext .js --ext .jsx --ext md --ext mdx",
     "test": "jest",
@@ -62,7 +63,8 @@
     "rehype-autolink-headings": "^5.1.0",
     "rehype-slug": "^4.0.1",
     "remark-external-links": "^8.0.0",
-    "remark-gfm": "^1.0.0"
+    "remark-gfm": "^1.0.0",
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.4",
