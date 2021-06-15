@@ -127,6 +127,9 @@ export async function getStaticProps(ctx) {
     # or yarn watch
 ```
 
+Read how to link component in
+[next-product-docs-example](https://github.com/zentered/next-product-docs-example)
+
 ## Additional Components
 
 For convenience we're providing two additional components that help you get
