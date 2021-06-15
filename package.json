@@ -23,11 +23,7 @@
     "watch": "watch 'npm run build' ./src",
     "style": "prettier --write \"./**/*.{js,jsx,json}\"",
     "lint": "eslint --fix . --ext .js --ext .jsx --ext md --ext mdx",
-    "test": "jest",
-    "unlink-component": "npm unlink && cd ./node_modules/react && npm unlink && cd ../react-dom && npm unlink",
-    "create-links": "npm link && cd ./node_modules/react && npm link && cd ../react-dom && npm link && cd ../../",
-    "link-component-to-folder": "cd ../next-product-docs-example/ && npm link react && npm link react-dom && npm link @opstrace/next-product-docs",
-    "link-component": "npm i && npm run build && npm run create-links && npm run link-component-to-folder"
+    "test": "jest"
   },
   "commitlint": {
     "extends": [

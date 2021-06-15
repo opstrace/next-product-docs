@@ -120,6 +120,13 @@ export async function getStaticProps(ctx) {
 }
 ```
 
+# Run Locally
+
+```bash
+    npm run watch
+    # or yarn watch
+```
+
 ## Additional Components
 
 For convenience we're providing two additional components that help you get
