@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import { Children } from 'react'
 
 const replaceChildContent = (children, substitutions) => {
   const modifiedChildren = Children.map(children, (child) => {

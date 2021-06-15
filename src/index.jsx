@@ -2,12 +2,6 @@ import React from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 import { State, Observe } from 'mdx-observable'
 import { Element } from 'react-scroll'
-import {
-  findRouteByPath,
-  getSlug,
-  getPaths,
-  fetchDocsManifest
-} from './lib/docs'
 import CodeBlock from './components/CodeBlock.jsx'
 import InlineCode from './components/InlineCode.jsx'
 import Tabs, { Tab } from './components/Tabs.jsx'
