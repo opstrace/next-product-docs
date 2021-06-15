@@ -2,8 +2,6 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
 
-const extensions = ['.js', '.jsx']
-
 export default [
   {
     input: './src/index.jsx',
@@ -38,6 +36,13 @@ export default [
       format: 'cjs'
     },
     external: ['@mdx-js/mdx', 'esbuild', 'pkg-dir'],
-    plugins: [resolve({ preferBuiltins: true }), commonjs()]
+    plugins: [
+      resolve({ preferBuiltins: true }),
+      commonjs(),
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**'
+      })
+    ]
   }
 ]

@@ -22,7 +22,11 @@
     "build": "rm -rf ./dist && rollup -c rollup.config.js",
     "style": "prettier --write \"./**/*.{js,jsx,json}\"",
     "lint": "eslint --fix . --ext .js --ext .jsx --ext md --ext mdx",
-    "test": "jest"
+    "test": "jest",
+    "unlink-component": "npm unlink && cd ./node_modules/react && npm unlink && cd ../react-dom && npm unlink",
+    "create-links": "npm link && cd ./node_modules/react && npm link && cd ../react-dom && npm link && cd ../../",
+    "link-component-to-folder": "cd ../next-product-docs-example/ && npm link react && npm link react-dom && npm link @opstrace/next-product-docs",
+    "link-component": "npm i && npm run build && npm run create-links && npm run link-component-to-folder"
   },
   "commitlint": {
     "extends": [
@@ -76,6 +80,7 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-mdx": "^1.13.0",
     "eslint-plugin-react": "^7.24.0",
     "husky": "^6.0.0",
     "jest": "=26",
