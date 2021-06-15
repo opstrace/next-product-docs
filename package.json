@@ -19,7 +19,8 @@
   "main": "dist/index.js",
   "scripts": {
     "prepare": "husky install",
-    "build": "rm -rf ./dist && rollup -c rollup.config.js",
+    "build": "rollup -c rollup.config.js",
+    "watch": "watch 'npm run build' ./src",
     "style": "prettier --write \"./**/*.{js,jsx,json}\"",
     "lint": "eslint --fix . --ext .js --ext .jsx --ext md --ext mdx",
     "test": "jest"
@@ -58,7 +59,8 @@
     "rehype-autolink-headings": "^5.1.0",
     "rehype-slug": "^4.0.1",
     "remark-external-links": "^8.0.0",
-    "remark-gfm": "^1.0.0"
+    "remark-gfm": "^1.0.0",
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.4",
@@ -76,6 +78,7 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-mdx": "^1.13.0",
     "eslint-plugin-react": "^7.24.0",
     "husky": "^6.0.0",
     "jest": "=26",
