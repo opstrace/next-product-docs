@@ -14,7 +14,16 @@ export default function Documentation({ source }) {
     Interpolate,
     State,
     Observe,
-    Element,
+    // eslint-disable-next-line react/display-name
+    Element: ({ name, ...props }) => {
+      return (
+        <Element
+          // remove name from parent div
+          name={props.children[0]?.props?.id === name ? null : name}
+          {...props}
+        />
+      )
+    },
     // eslint-disable-next-line react/display-name
     pre: (props) => <div {...props} />,
     code: CodeBlock,

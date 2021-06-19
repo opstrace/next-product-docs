@@ -23,7 +23,7 @@ import { getRawFileFromRepo } from './lib/github'
 
 const DOCS_FOLDER = process.env.DOCS_FOLDER
 
-export async function pageProps(params) {
+export async function pageProps({ params }) {
   const slugger = new GithubSlugger()
   const manifest = await fetchDocsManifest().catch((error) => {
     if (error.status === 404) return
