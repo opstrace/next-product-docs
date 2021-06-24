@@ -68,11 +68,11 @@ or check out the
 
 In your Next.js website repo, run:
 
-    yarn add next-product-docs
+    yarn add @opstrace/next-product-docs
 
 or
 
-    npm install next-product-docs
+    npm install @opstrace/next-product-docs
 
 The location of your product docs can be configured through environment
 variables in your `.env` file:
