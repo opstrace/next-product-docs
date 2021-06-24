@@ -1,0 +1,32 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Test
+        run: yarn test
+
+      - name: Build
+        run: yarn build
+
+      - name: Semantic Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
