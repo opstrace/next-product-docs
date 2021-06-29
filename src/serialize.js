@@ -138,6 +138,5 @@ export async function staticPaths() {
   } else {
     paths = await getStaticPaths()
   }
-  console.log(paths)
   return paths
 }
