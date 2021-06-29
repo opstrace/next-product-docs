@@ -17,7 +17,7 @@ function removeVersion(slug) {
 }
 
 export function getSlug(params, withReleases) {
-  const originalSlug = withReleases ? removeVersion(slug) : params.slug
+  const originalSlug = withReleases ? removeVersion(params.slug) : params.slug
   const slug = getDocsSlug(originalSlug)
   return {
     slug: `/docs/${slug.join('/')}`,
