@@ -13,7 +13,7 @@ function removeFromLast(path, key) {
 }
 
 function removeVersion(slug) {
-  return slug ? slug.slice(0, 0) : slug
+  return slug ? slug.slice(1) : slug
 }
 
 export function getSlug(params, withReleases) {
