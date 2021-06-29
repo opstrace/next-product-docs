@@ -5,9 +5,7 @@ export default function relativeLinks(options) {
   if (!options) {
     options = {}
   }
-  if (!options.destination) {
-    options.destination = ''
-  }
+  if (!options.destination) return;
 
   function visitor(node) {
     if (node && node.url) {
