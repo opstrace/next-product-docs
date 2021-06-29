@@ -34,9 +34,8 @@ export async function pageProps({ params }) {
   }
 
   const { slug, tag } = getSlug(params, FETCH_RELEASES)
-  const branch = tag || process.env.DOCS_BRANCH
 
-  const manifest = await fetchDocsManifest(branch).catch((error) => {
+  const manifest = await fetchDocsManifest(tag).catch((error) => {
     if (error.status === 404) return
     throw error
   })
@@ -50,7 +49,7 @@ export async function pageProps({ params }) {
       notFound: true
     }
 
-  const mdxRawContent = await getRawFileFromRepo(route.path, branch)
+  const mdxRawContent = await getRawFileFromRepo(route.path, tag)
 
   const { content, data } = matter(mdxRawContent)
   const mdxSource = await serialize(content, {

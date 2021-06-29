@@ -13,7 +13,7 @@ function removeFromLast(path, key) {
 }
 
 function removeVersion(slug) {
-  return slug ? slug.slice(1, 1) : slug
+  return slug ? slug.slice(0, 0) : slug
 }
 
 export function getSlug(params, withReleases) {
@@ -21,7 +21,7 @@ export function getSlug(params, withReleases) {
   const slug = getDocsSlug(originalSlug)
   return {
     slug: `/docs/${slug.join('/')}`,
-    tag: withReleases ? params.slug[1] : null
+    tag: withReleases ? params.slug[0] : null
   }
 }
 
@@ -53,7 +53,7 @@ export function getPaths(nextRoutes, carry = []) {
   return carry
 }
 
-export async function getStaticPaths(tag = process.env.DOCS_BRANCH) {
+export async function getStaticPaths(tag) {
   const manifest = await fetchDocsManifest(tag)
   const paths = getPaths(manifest.routes)
   paths.shift() // remove "/docs/README"

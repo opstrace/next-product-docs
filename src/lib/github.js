@@ -4,6 +4,7 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const org = process.env.DOCS_ORG
 const repo = process.env.DOCS_REPO
+const branch = process.env.DOCS_BRANCH
 
 function getErrorText(res) {
   try {
@@ -37,8 +38,10 @@ export async function getRawFileFromGitHub(path) {
   throw await getError(res, path)
 }
 
-export function getRawFileFromRepo(path, tag = process.env.DOCS_BRANCH) {
-  return getRawFileFromGitHub(`/${org}/${repo}/${tag}${path}`)
+export function getRawFileFromRepo(path, tag) {
+  return getRawFileFromGitHub(
+    `/${org}/${repo}/${branch}${path}${tag ? '?ref=' + tag : ''}`
+  )
 }
 
 export async function getReleases() {
