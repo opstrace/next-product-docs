@@ -28,9 +28,9 @@ const FETCH_RELEASES = process.env.FETCH_RELEASES
 export async function pageProps({ params }) {
   const slugger = new GithubSlugger()
 
-  let releases = null
+  let tags = null
   if (FETCH_RELEASES) {
-    releases = await getReleases()
+    tags = await getReleases()
   }
 
   const { slug, tag } = getSlug(params, FETCH_RELEASES)
@@ -126,7 +126,7 @@ export async function pageProps({ params }) {
     route,
     source: mdxSource,
     tocHeadings: headings,
-    releases
+    tags
   }
 }
 
