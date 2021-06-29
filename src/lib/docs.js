@@ -61,7 +61,7 @@ export async function getStaticPaths(tag) {
   return paths
 }
 
-export async function getPathsFromReleases() {
+export async function getStaticPathsFromTags() {
   const tags = await getReleases()
   let paths = []
   for (const tag of tags) {

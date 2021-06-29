@@ -18,7 +18,7 @@ import {
   getSlug,
   fetchDocsManifest,
   getStaticPaths,
-  getPathsFromReleases
+  getStaticPathsFromTags
 } from './lib/docs'
 import { getRawFileFromRepo, getReleases } from './lib/github'
 
@@ -133,7 +133,7 @@ export async function pageProps({ params }) {
 export async function staticPaths() {
   let paths = null
   if (FETCH_RELEASES) {
-    paths = await getPathsFromReleases()
+    paths = await getStaticPathsFromTags()
   } else {
     paths = await getStaticPaths()
   }
