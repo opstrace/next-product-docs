@@ -103,9 +103,9 @@
     "watch": "^1.0.2"
   },
   "peerDependencies": {
-    "next": "^11.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "next": "11.x",
+    "react": "17.x",
+    "react-dom": "17.x"
   },
   "release": {
     "branches": [
