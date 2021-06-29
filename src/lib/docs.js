@@ -1,4 +1,4 @@
-import { getRawFileFromRepo } from './github'
+import { getRawFileFromRepo, getReleases } from './github'
 
 const DOCS_FOLDER = process.env.DOCS_FOLDER
 const DOCS_FALLBACK = process.env.DOCS_FALLBACK
@@ -12,14 +12,23 @@ function removeFromLast(path, key) {
   return i === -1 ? path : path.substring(0, i)
 }
 
-export function getSlug(params) {
-  const slug = getDocsSlug(params.slug)
-  return { slug: `/docs/${slug.join('/')}` }
+function removeVersion(slug) {
+  return slug ? slug.slice(1, 1) : slug
 }
 
-export async function fetchDocsManifest() {
+export function getSlug(params, withReleases) {
+  const originalSlug = withReleases ? removeVersion(slug) : params.slug
+  const slug = getDocsSlug(originalSlug)
+  console.log('slug', slug)
+  return {
+    slug: `/docs/${slug.join('/')}`,
+    tag: withReleases ? params.slug[1] : null
+  }
+}
+
+export async function fetchDocsManifest(tag) {
   const path = `/${DOCS_FOLDER}/manifest.json`
-  const res = await getRawFileFromRepo(path)
+  const res = await getRawFileFromRepo(path, tag)
   return JSON.parse(res)
 }
 
@@ -43,6 +52,27 @@ export function getPaths(nextRoutes, carry = []) {
   })
 
   return carry
+}
+
+export async function getStaticPaths(tag = process.env.DOCS_BRANCH) {
+  const manifest = await fetchDocsManifest(tag)
+  const paths = getPaths(manifest.routes)
+  paths.shift() // remove "/docs/README"
+  paths.unshift(`/${process.env.DOCS_FOLDER}`)
+  return paths
+}
+
+export async function getPathsFromReleases() {
+  const tags = await getReleases()
+  let paths = []
+  for (const tag of tags) {
+    const tagPaths = await getStaticPaths(tag.name)
+    paths = [
+      ...paths,
+      ...tagPaths.map((p) => p.replace('/docs', `/docs/${tag.name}`))
+    ]
+  }
+  return paths
 }
 
 export function replaceDefaultPath(routes) {

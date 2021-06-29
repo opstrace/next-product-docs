@@ -1,4 +1,9 @@
 const RAW_GITHUB_URL = 'https://raw.githubusercontent.com'
+import { Octokit } from '@octokit/core'
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
+
+const org = process.env.DOCS_ORG
+const repo = process.env.DOCS_REPO
 
 function getErrorText(res) {
   try {
@@ -32,9 +37,14 @@ export async function getRawFileFromGitHub(path) {
   throw await getError(res, path)
 }
 
-export function getRawFileFromRepo(path) {
-  const org = process.env.DOCS_ORG
-  const repo = process.env.DOCS_REPO
-  const tag = process.env.DOCS_BRANCH
+export function getRawFileFromRepo(path, tag = process.env.DOCS_BRANCH) {
   return getRawFileFromGitHub(`/${org}/${repo}/${tag}${path}`)
+}
+
+export async function getReleases() {
+  const { data } = await octokit.request(`GET /repos/${org}/${repo}/releases`, {
+    owner: org,
+    repo
+  })
+  return data ? data.map((t) => ({ url: t.html_url, name: t.tag_name })) : []
 }

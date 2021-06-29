@@ -16,20 +16,31 @@ import {
   findRouteByPath,
   replaceDefaultPath,
   getSlug,
-  getPaths,
-  fetchDocsManifest
+  fetchDocsManifest,
+  getStaticPaths,
+  getPathsFromReleases
 } from './lib/docs'
-import { getRawFileFromRepo } from './lib/github'
+import { getRawFileFromRepo, getReleases } from './lib/github'
 
 const DOCS_FOLDER = process.env.DOCS_FOLDER
+const FETCH_RELEASES = process.env.FETCH_RELEASES
 
 export async function pageProps({ params }) {
   const slugger = new GithubSlugger()
-  const manifest = await fetchDocsManifest().catch((error) => {
+
+  let releases = null
+  if (FETCH_RELEASES) {
+    releases = await getReleases()
+  }
+
+  const { slug, tag } = getSlug(params, FETCH_RELEASES)
+  const branch = tag || process.env.DOCS_BRANCH
+
+  const manifest = await fetchDocsManifest(branch).catch((error) => {
     if (error.status === 404) return
     throw error
   })
-  const { slug } = getSlug(params)
+
   const route = manifest && findRouteByPath(slug, manifest.routes)
   const manifestRoutes = cloneDeep(manifest.routes)
   replaceDefaultPath(manifestRoutes)
@@ -39,7 +50,8 @@ export async function pageProps({ params }) {
       notFound: true
     }
 
-  const mdxRawContent = await getRawFileFromRepo(route.path)
+  const mdxRawContent = await getRawFileFromRepo(route.path, branch)
+
   const { content, data } = matter(mdxRawContent)
   const mdxSource = await serialize(content, {
     scope: { data },
@@ -114,14 +126,18 @@ export async function pageProps({ params }) {
     sidebarRoutes: manifestRoutes,
     route,
     source: mdxSource,
-    tocHeadings: headings
+    tocHeadings: headings,
+    releases
   }
 }
 
 export async function staticPaths() {
-  const manifest = await fetchDocsManifest()
-  const paths = getPaths(manifest.routes)
-  paths.shift() // remove "/docs/README"
-  paths.unshift(`/${process.env.DOCS_FOLDER}`)
+  let paths = null
+  if (FETCH_RELEASES) {
+    paths = await getPathsFromReleases()
+  } else {
+    paths = await getStaticPaths()
+  }
+  console.log(paths)
   return paths
 }
