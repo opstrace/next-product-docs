@@ -40,69 +40,57 @@ more sub text
       </MDX>
     )
     expect(testComponent.container).toMatchInlineSnapshot(`
-      <div>
-        <div
-          name="hi"
-        >
-          <h1>
-            Hi
-          </h1>
-          <p>
-            Here is my text
-          </p>
-          <div
-            name="subthing"
-          >
-            <h2>
-              Subthing
-            </h2>
-            <p>
-              more sub text
-            </p>
-          </div>
-          <div
-            name="subthing-2"
-          >
-            <h2>
-              Subthing 2
-            </h2>
-            <p>
-              more sub 22 text
-            </p>
-          </div>
-        </div>
-        <div
-          name="another-main-thing"
-        >
-          <h1>
-            Another main thing
-          </h1>
-          <p>
-            eeehoo
-          </p>
-          <div
-            name="second-subthing-after-first-main-thing"
-          >
-            <h2>
-              Second subthing after first main thing
-            </h2>
-            <p>
-              more sub text
-            </p>
-          </div>
-        </div>
-        <div
-          name="leftover"
-        >
-          <h1>
-            Leftover
-          </h1>
-          <p>
-            more sub text
+<div>
+  <div>
+    <h1>
+      Hi
+    </h1>
+    <p>
+      Here is my text
+    </p>
+    <div>
+      <h2>
+        Subthing
+      </h2>
+      <p>
+        more sub text
+      </p>
+    </div>
+    <div>
+      <h2>
+        Subthing 2
+      </h2>
+      <p>
+        more sub 22 text
+      </p>
+    </div>
+  </div>
+  <div>
+    <h1>
+      Another main thing
+    </h1>
+    <p>
+      eeehoo
+    </p>
+    <div>
+      <h2>
+        Second subthing after first main thing
+      </h2>
+      <p>
+        more sub text
+      </p>
+    </div>
+  </div>
+  <div>
+    <h1>
+      Leftover
+    </h1>
+    <p>
+      more sub text
 
-          </p>
-        </div>
-      </div>
-    `)
+    </p>
+  </div>
+</div>
+`)
   })
 })
