@@ -2,7 +2,7 @@ import { serialize } from 'next-mdx-remote/serialize'
 import matter from 'gray-matter'
 import marked from 'marked'
 import GithubSlugger from 'github-slugger'
-import * as rehypeSlug from 'rehype-slug'
+import rehypeSlug from 'rehype-slug'
 import rehypeAutolink from 'rehype-autolink-headings'
 import cloneDeep from 'lodash/cloneDeep'
 
