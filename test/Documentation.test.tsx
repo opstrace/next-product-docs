@@ -49,7 +49,7 @@ describe('Document', () => {
   it('should render', async () => {
     const { source } = await pageProps({ params: { slug: ['one'] } })
     const container = render(<Documentation source={source} />)
-    container.debug()
+    // container.debug()
     expect(container.asFragment()).toMatchSnapshot()
   })
 })
