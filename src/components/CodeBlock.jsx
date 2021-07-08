@@ -1,6 +1,6 @@
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import github from 'prism-react-renderer/themes/github'
+import github from '../lib/github-prism-theme.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useState } from 'react'
 
