@@ -1,4 +1,5 @@
-const RAW_GITHUB_URL = 'https://raw.githubusercontent.com'
+const RAW_GITHUB_URL =
+  process.env.NEXT_PUBLIC_RAW_GITHUB_URL || 'https://raw.githubusercontent.com'
 
 function getErrorText(res) {
   try {
