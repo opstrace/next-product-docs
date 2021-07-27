@@ -33,7 +33,7 @@ export default function relativeLinks(options) {
       }
 
       let path = ''
-      if (pathParts && pathParts.length > 1) {
+      if (pathParts && pathParts.length >= 1) {
         path = pathParts.join('/')
         path += '/'
       }
