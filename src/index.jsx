@@ -30,5 +30,5 @@ export default function Documentation({ source, theme }) {
     inlineCode: InlineCode
   }
 
-  return <MDXRemote {...source} components={components} />
+  return <MDXRemote {...source} components={components} theme={theme} />
 }
