@@ -31,14 +31,14 @@ const doneIcon = (
   </svg>
 )
 
-export default function CodeBlock({ className = '', children }) {
+export default function CodeBlock({ children, className = '', theme = github }) {
   const [copied, setCopied] = useState(copyIcon)
   const language = className.replace(/language-/, '')
   return (
     <div className="relative">
       <Highlight
         {...defaultProps}
-        theme={github}
+        theme={theme}
         code={children.trim()}
         language={language}
       >

@@ -1,14 +1,14 @@
 import React from 'react'
 import github from 'prism-react-renderer/themes/github'
 
-export default function InlineCode({ className, children }) {
+export default function InlineCode({ className, children, theme = github }) {
   return (
     <code
       className={className}
       style={{
-        color: github.plain.color,
+        color: theme.plain.color,
         // stylelint-disable-next-line value-keyword-case
-        backgroundColor: github.plain.backgroundColor,
+        backgroundColor: theme.plain.backgroundColor,
         padding: '0.2em 0.4em',
         borderRadius: '6px',
         margin: 0,
