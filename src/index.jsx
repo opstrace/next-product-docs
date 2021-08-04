@@ -7,7 +7,7 @@ import InlineCode from './components/InlineCode.jsx'
 import Tabs, { Tab } from './components/Tabs.jsx'
 import Interpolate from './components/Interpolate.jsx'
 
-export default function Documentation({ source }) {
+export default function Documentation({ source, theme }) {
   const components = {
     Tabs: Tabs,
     Tab: Tab,
