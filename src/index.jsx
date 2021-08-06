@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 import { State, Observe } from 'mdx-observable'
@@ -14,7 +15,6 @@ export default function Documentation({ source, theme }) {
     Interpolate,
     State,
     Observe,
-    // eslint-disable-next-line react/display-name
     Element: ({ name, ...props }) => {
       return (
         <Element
@@ -24,10 +24,9 @@ export default function Documentation({ source, theme }) {
         />
       )
     },
-    // eslint-disable-next-line react/display-name
     pre: (props) => <div {...props} />,
-    code: CodeBlock,
-    inlineCode: InlineCode
+    code: (props) => <CodeBlock {...props} theme={theme} />,
+    inlineCode: (props) => <InlineCode {...props} theme={theme} />
   }
 
   return <MDXRemote {...source} components={components} theme={theme} />
