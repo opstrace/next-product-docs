@@ -2,7 +2,6 @@ import React from 'react'
 import github from 'prism-react-renderer/themes/github'
 
 export default function InlineCode({ className, children, theme = github }) {
-  console.log(theme)
   return (
     <code
       className={className}
