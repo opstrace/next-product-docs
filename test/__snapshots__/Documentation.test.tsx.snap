@@ -13,7 +13,7 @@ exports[`Document should render 1`] = `
     >
       First Level
       <a
-        class="flex invisible"
+        class="btn-copy-link invisible"
         href="#first-level"
       >
         <svg
@@ -38,7 +38,7 @@ exports[`Document should render 1`] = `
       >
         Second Level One
         <a
-          class="flex invisible"
+          class="btn-copy-link invisible"
           href="#second-level-one"
         >
           <svg
@@ -67,7 +67,7 @@ exports[`Document should render 1`] = `
       >
         Second Level Two
         <a
-          class="flex invisible"
+          class="btn-copy-link invisible"
           href="#second-level-two"
         >
           <svg
