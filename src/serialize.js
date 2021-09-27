@@ -51,7 +51,7 @@ export async function pageProps({ params }) {
           {
             behavior: 'append',
             properties: {
-              className: ['flex', 'invisible']
+              className: ['btn-copy-link', 'invisible']
             },
             content: {
               type: 'element',
