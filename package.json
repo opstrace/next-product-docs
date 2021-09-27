@@ -18,6 +18,7 @@
   "contributors": [
     "Patrick Heneise (https://github.com/PatrickHeneise)",
     "Moritz Sattler (https://github.com/MoSattler)",
+    "Christian Mejlak (https://github.com/C-Mejlak)",
     "Alexander Khvostov (https://github.com/alexanderKhvostov)"
   ],
   "main": "dist/index.js",
