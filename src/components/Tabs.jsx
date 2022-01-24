@@ -10,7 +10,7 @@ const MobileTabs = ({ className, options, value, onChange }) => (
       value={value}
       onChange={onChange}
       id="tabs"
-      className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+      className="docs-tabs-mobile-select"
     >
       {options.map((opt) => (
         <option key={opt}>{opt}</option>

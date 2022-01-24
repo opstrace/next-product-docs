@@ -10,7 +10,14 @@ export default [
       format: 'cjs',
       exports: 'default'
     },
-    external: ['react', 'next-mdx-remote', 'mdx-observable', 'react-scroll'],
+    external: [
+      'react',
+      'next-mdx-remote',
+      'mdx-observable',
+      'react-scroll',
+      'fs',
+      'path'
+    ],
     plugins: [
       resolve(),
       commonjs(),

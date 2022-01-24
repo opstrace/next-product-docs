@@ -1,4 +1,4 @@
-import { getRawFileFromRepo } from './github'
+import { getRawFile } from './files'
 
 const DOCS_FOLDER = process.env.DOCS_FOLDER
 const DOCS_FALLBACK = process.env.DOCS_FALLBACK
@@ -19,13 +19,18 @@ export function getSlug(params) {
 
 export async function fetchDocsManifest() {
   const path = `/${DOCS_FOLDER}/manifest.json`
-  const res = await getRawFileFromRepo(path)
+  const res = await getRawFile(path)
   return JSON.parse(res)
 }
 
 export function findRouteByPath(path, routes) {
   for (const route of routes) {
     if (route.path && removeFromLast(route.path, '.') === path) {
+      return route
+    } else if (
+      route.path &&
+      removeFromLast(route.path, '.').replace(`/${DOCS_FALLBACK}`, '') === path
+    ) {
       return route
     }
     const childPath = route.routes && findRouteByPath(path, route.routes)
@@ -36,6 +41,9 @@ export function findRouteByPath(path, routes) {
 export function getPaths(nextRoutes, carry = []) {
   nextRoutes.forEach(({ path, routes }) => {
     if (path) {
+      if (path.indexOf(DOCS_FALLBACK) > -1) {
+        carry.push(removeFromLast(path, '.').replace(`/${DOCS_FALLBACK}`, ''))
+      }
       carry.push(removeFromLast(path, '.'))
     } else if (routes) {
       getPaths(routes, carry)
