@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 const copyIcon = (
   <svg
-    className="text-opstrace-600 h-6 w-6"
+    className="docs-codeblock-copy-icon"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
@@ -17,7 +17,7 @@ const copyIcon = (
 )
 const doneIcon = (
   <svg
-    className="text-opstrace-600 h-6 w-6"
+    className="docs-codeblock-done-icon"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
@@ -31,7 +31,11 @@ const doneIcon = (
   </svg>
 )
 
-export default function CodeBlock({ children, className = '', theme = github }) {
+export default function CodeBlock({
+  children,
+  className = '',
+  theme = github
+}) {
   const [copied, setCopied] = useState(copyIcon)
   const language = className.replace(/language-/, '')
   return (
@@ -48,9 +52,7 @@ export default function CodeBlock({ children, className = '', theme = github }) 
               text={children.trim()}
               onCopy={() => setCopied(doneIcon)}
             >
-              <button className="absolute top-3 -right-8 text-opstrace-600">
-                {copied}
-              </button>
+              <button className="docs-codeblock-btn">{copied}</button>
             </CopyToClipboard>
             <pre className={`${className}`} style={{ ...style }}>
               {tokens.map((line, i) => (

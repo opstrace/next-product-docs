@@ -17,7 +17,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:mdx/recommended",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {

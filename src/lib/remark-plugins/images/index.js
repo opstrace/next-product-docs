@@ -1,11 +1,11 @@
-import visit from 'unist-util-visit'
+import { visit } from 'unist-util-visit'
 import { URL } from 'url'
 
 export default function relativeLinks(options) {
   if (!options) {
     options = {}
   }
-  if (!options.destination) return;
+  if (!options.destination) return
 
   function visitor(node) {
     if (node && node.url) {

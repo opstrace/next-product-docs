@@ -75,7 +75,11 @@ or
     npm install @opstrace/next-product-docs
 
 The location of your product docs can be configured through environment
-variables in your `.env` file:
+variables in your `.env` file. There are two possible ways to retrieve docs:
+
+### Retrieve docs from GitHub Repo
+
+ie. `github.com/zentered/next-product-docs-example/main`
 
 ```
 GITHUB_TOKEN=
@@ -85,6 +89,17 @@ DOCS_REPO=next-product-docs-example
 DOCS_BRANCH=main
 DOCS_FALLBACK=README
 ASSETS_DESTINATION=/assets
+```
+
+### Retrieve docs from local docs folder
+
+ie. `./content/docs`:
+
+```
+DOCS_PATH=content
+DOCS_FOLDER=docs
+DOCS_FALLBACK=README
+ASSETS_DESTINATION=
 ```
 
 Create a new page `pages/docs/[[...slug]].jsx` which calls the provided
