@@ -42,7 +42,7 @@ export default [
       dir: './dist',
       format: 'cjs'
     },
-    external: ['@mdx-js/mdx', 'esbuild', 'pkg-dir'],
+    external: ['@mdx-js/mdx', 'esbuild'],
     plugins: [
       resolve({ preferBuiltins: true }),
       commonjs(),

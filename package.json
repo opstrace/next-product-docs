@@ -1,5 +1,5 @@
 {
-  "name": "@zentered/next-product-docs",
+  "name": "@opstrace/next-product-docs",
   "version": "0.0.0-development",
   "description": "React/Next.js Render Remote Content",
   "keywords": [
@@ -95,6 +95,7 @@
     "nock": "^13.2.2",
     "node-fetch": "^3.2.0",
     "pinst": "^2.1.6",
+    "pkg-dir": "^5.0.0",
     "prettier": "^2.5.1",
     "react": "*",
     "react-dom": "*",
