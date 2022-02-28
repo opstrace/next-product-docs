@@ -1,0 +1,13 @@
+test
+.prettierrc
+.babelrc
+src
+.eslint*
+.github
+coverage
+setupTests.js
+assets
+.husky
+.stylelintrc.json
+jest.config.json  
+rollup.config.js  

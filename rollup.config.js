@@ -2,37 +2,31 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
 
+// eslint-disable-next-line no-unused-vars
+const extensions = ['.js', '.jsx']
+
 export default [
   {
     input: './src/index.jsx',
     output: {
       dir: './dist',
-      format: 'cjs',
-      exports: 'default'
+      format: 'es'
     },
     external: [
       'react',
       'next-mdx-remote',
       'mdx-observable',
       'react-scroll',
+      'react-copy-to-clipboard',
       'fs',
       'path'
     ],
     plugins: [
       resolve(),
-      commonjs(),
       babel({
         babelHelpers: 'bundled',
         exclude: 'node_modules/**',
-        presets: [
-          '@babel/env',
-          [
-            '@babel/preset-react',
-            {
-              runtime: 'automatic'
-            }
-          ]
-        ]
+        presets: ['@babel/env', '@babel/preset-react']
       })
     ]
   },
@@ -40,13 +34,24 @@ export default [
     input: './src/serialize.js',
     output: {
       dir: './dist',
-      format: 'cjs'
+      format: 'es'
     },
     external: ['@mdx-js/mdx', 'esbuild'],
     plugins: [
       resolve({ preferBuiltins: true }),
       commonjs(),
       babel({
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: {
+                node: 'current'
+              }
+            }
+          ],
+          '@babel/preset-react'
+        ],
         babelHelpers: 'bundled',
         exclude: 'node_modules/**'
       })

@@ -2,7 +2,6 @@ import { render } from '@testing-library/react'
 import Documentation from '../src'
 import { pageProps } from '../src/serialize'
 import nock from 'nock'
-import userEvent from '@testing-library/user-event'
 
 beforeAll(async () => {
   const docOneFixture = `

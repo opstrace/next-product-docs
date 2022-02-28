@@ -1,4 +1,4 @@
-import { visit } from 'unist-util-visit'
+import visit from 'unist-util-visit'
 
 export default function relativeLinks(options) {
   let pathParts = []
@@ -19,9 +19,11 @@ export default function relativeLinks(options) {
 
       // handle relative paths
       if (options.slug && Array.isArray(options.slug)) {
-        const depth = (node.url.match(/\.\.\//g) || []).length
-        const removeLast = options.slug.length - depth - 1
-        pathParts = options.slug.slice(0, removeLast)
+        if (options.slug.length > 1) {
+          const depth = (node.url.match(/\.\.\//g) || []).length
+          const removeLast = options.slug.length - depth - 1
+          pathParts = options.slug.slice(0, removeLast)
+        }
       }
 
       if (node.url.startsWith('./')) {
@@ -48,7 +50,7 @@ export default function relativeLinks(options) {
   }
 
   function transform(tree) {
-    visit(tree, ['link', 'linkReference'], visitor)
+    visit(tree, ['link'], visitor)
   }
 
   return transform

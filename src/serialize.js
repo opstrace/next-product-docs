@@ -6,9 +6,12 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolink from 'rehype-autolink-headings'
 import cloneDeep from 'lodash/cloneDeep'
 
-import remarkTabs from './lib/remark-plugins/tabs'
-import remarkState from './lib/remark-plugins/state'
-import remarkSections from './lib/remark-plugins/sections'
+import { codeImport as remarkCodeImport } from './lib/remark-plugins/import'
+import remarkInlineLinks from 'remark-inline-links'
+// TODO: plugins require some refactoring, see https://github.com/storybookjs/storybook/issues/9602 for inspiration/guidance
+// import remarkTabs from './lib/remark-plugins/tabs'
+// import remarkState from './lib/remark-plugins/state'
+// import remarkSections from './lib/remark-plugins/sections'
 import remarkExternalLinks from 'remark-external-links'
 import remarkInternalLinks from './lib/remark-plugins/links'
 import remarkRewriteImages from './lib/remark-plugins/images'
@@ -43,6 +46,10 @@ export async function pageProps({ params }) {
   if (!data.title) {
     data.title = ''
   }
+  const importBasePath = `${process.cwd()}/content${slug
+    .split('/')
+    .slice(0, -1)
+    .join('/')}`
   const mdxSource = await serialize(content, {
     scope: { data },
     mdxOptions: {
@@ -83,10 +90,18 @@ export async function pageProps({ params }) {
         ]
       ],
       remarkPlugins: [
-        remarkSections,
-        remarkTabs,
-        remarkState,
+        [
+          remarkCodeImport,
+          {
+            disabled: process.env.DOCS_REPO ? true : false, // only works with local filesystem, not remote fetch
+            importBasePath: importBasePath
+          }
+        ],
+        // remarkSections,
+        // remarkTabs,
+        // remarkState,
         [remarkRewriteImages, { destination: process.env.ASSETS_DESTINATION }],
+        remarkInlineLinks,
         [remarkExternalLinks, { target: false, rel: ['nofollow'] }],
         [
           remarkInternalLinks,

@@ -1,7 +1,8 @@
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import github from '../lib/github-prism-theme.js'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import pkg from 'react-copy-to-clipboard'
+const { CopyToClipboard } = pkg
 import { useState } from 'react'
 
 const copyIcon = (

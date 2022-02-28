@@ -9,3 +9,4 @@ process.env.DOCS_ORG = 'my-docs'
 process.env.DOCS_REPO = 'my-repo'
 process.env.DOCS_BRANCH = 'my-branch'
 process.env.DOCS_FOLDER = 'my-docs'
+process.env.DOCS_USE_MDX = false

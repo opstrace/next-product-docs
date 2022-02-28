@@ -6,6 +6,7 @@ const cases = [
     ['guides', 'contributor', 'workflows'],
     '/docs/guides/contributor/test-remote'
   ],
+  ['../usage/kube-csr.md', ['faq'], '/docs/usage/kube-csr'],
   ['./references/concepts.md', ['README'], '/docs/references/concepts'],
   [
     '../../references/cli.md',

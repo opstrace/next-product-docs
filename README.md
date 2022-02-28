@@ -160,6 +160,19 @@ using `react-scroll` to highlight the current section of the page in the table
 of contents. In the sidebar you can easily integrate search for example with
 [Algolia React InstantSearch](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/).
 
+### Code Import
+
+You can import code from external files:
+
+```js file=./examples/hello.js
+
+```
+
+This only works when working with a local folder, not by fetching the docs from
+a remote repository. Check out
+[remark-code-import](https://github.com/kevin940726/remark-code-import) for
+further information.
+
 ## Contributing
 
 Considering contributing to next-product-docs? We'd love to work with you!
