@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import React from 'react'
 import remarkState from '../../src/lib/remark-plugins/state/index.js'
 import { render } from '@testing-library/react'

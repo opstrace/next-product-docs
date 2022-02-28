@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import React from 'react'
 import remarkSection from '../../src/lib/remark-plugins/sections/index'
 import { render } from '@testing-library/react'

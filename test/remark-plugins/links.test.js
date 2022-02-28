@@ -6,6 +6,8 @@ const cases = [
     ['guides', 'contributor', 'workflows'],
     '/docs/guides/contributor/test-remote'
   ],
+  ['../usage/kube-csr.md', ['faq', 'README'], '/docs/usage/kube-csr'],
+  ['./kubectl.md', ['installation'], '/docs/installation/kubectl'],
   ['./references/concepts.md', ['README'], '/docs/references/concepts'],
   [
     '../../references/cli.md',
@@ -21,6 +23,32 @@ const cases = [
     '../guides/user/sending-metrics-with-prometheus.md#remote_write-configuration-block-the-basics',
     ['references', 'faq'],
     '/docs/guides/user/sending-metrics-with-prometheus#remote_write-configuration-block-the-basics'
+  ],
+  ['../faq/README.md', ['installation', 'verify'], '/docs/faq'],
+  [
+    '#managed-identity-using-aad-pod-identities',
+    ['docs', 'configuration', 'acme', 'dns01', 'azuredns'],
+    '/docs/configuration/acme/dns01/azuredns/#managed-identity-using-aad-pod-identities'
+  ],
+  [
+    '#challenge-scheduling',
+    ['concepts', 'acme-orders-challenges'],
+    '/docs/concepts/acme-orders-challenges/#challenge-scheduling'
+  ],
+  [
+    '/release-notes-1.7.md',
+    ['docs', 'release-notes', 'README'],
+    '/docs/release-notes/release-notes-1.7'
+  ],
+  [
+    './acme-dns.md',
+    ['configuration', 'acme', 'dns01', 'README'],
+    '/docs/configuration/acme/dns01/acme-dns'
+  ],
+  [
+    '#reinstalling-cert-manager',
+    ['installation', 'upgrading', 'README', 'README'],
+    '/docs/installation/upgrading/#reinstalling-cert-manager'
   ]
 ]
 

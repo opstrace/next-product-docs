@@ -3,12 +3,18 @@ import matter from 'gray-matter'
 import { marked } from 'marked'
 import GithubSlugger from 'github-slugger'
 import rehypeSlug from 'rehype-slug'
+// import rehypeSanitize from 'rehype-sanitize'
 import rehypeAutolink from 'rehype-autolink-headings'
 import cloneDeep from 'lodash/cloneDeep'
 
-import remarkTabs from './lib/remark-plugins/tabs'
-import remarkState from './lib/remark-plugins/state'
-import remarkSections from './lib/remark-plugins/sections'
+import { codeImport as remarkCodeImport } from './lib/remark-plugins/import'
+import remarkInlineLinks from 'remark-inline-links'
+// import remarkHeadingId from './lib/remark-plugins/heading-ids'
+// TODO: plugins require some refactoring, see https://github.com/storybookjs/storybook/issues/9602 for inspiration/guidance
+// import remarkTabs from './lib/remark-plugins/tabs'
+// import remarkState from './lib/remark-plugins/state'
+// import remarkSections from './lib/remark-plugins/sections'
+import remarkGfm from 'remark-gfm'
 import remarkExternalLinks from 'remark-external-links'
 import remarkInternalLinks from './lib/remark-plugins/links'
 import remarkRewriteImages from './lib/remark-plugins/images'
@@ -21,11 +27,13 @@ import {
 } from './lib/docs'
 import { getRawFile } from './lib/files'
 
-const DOCS_FOLDER = process.env.DOCS_FOLDER
-
 export async function pageProps({ params }) {
+  const docsFolder = params.docsFolder
+    ? params.docsFolder
+    : process.env.DOCS_FOLDER
+
   const slugger = new GithubSlugger()
-  const manifest = await fetchDocsManifest().catch((error) => {
+  const manifest = await fetchDocsManifest(docsFolder).catch((error) => {
     if (error.status === 404) return
     throw error
   })
@@ -35,6 +43,10 @@ export async function pageProps({ params }) {
     return {
       notFound: true
     }
+  const inlineLinkSlugHelper =
+    params.slug?.length > 0 && route.path.endsWith('README.md')
+      ? params.slug?.concat(['README'])
+      : params.slug
   const manifestRoutes = cloneDeep(manifest.routes)
   replaceDefaultPath(manifestRoutes)
 
@@ -43,8 +55,16 @@ export async function pageProps({ params }) {
   if (!data.title) {
     data.title = ''
   }
+
+  const importBasePath = `${process.cwd()}/content${slug
+    .split('/')
+    .slice(0, -1)
+    .join('/')}`
+
   const mdxSource = await serialize(content, {
+    parseFrontmatter: false,
     scope: { data },
+    format: process.env.DOCS_USE_MDX === 'true' ? 'mdx' : 'md',
     mdxOptions: {
       rehypePlugins: [
         rehypeSlug,
@@ -83,22 +103,32 @@ export async function pageProps({ params }) {
         ]
       ],
       remarkPlugins: [
-        remarkSections,
-        remarkTabs,
-        remarkState,
+        // remarkHeadingId,
+        // remarkSections,
+        // remarkTabs,
+        // remarkState,
+        remarkGfm,
+        [
+          remarkCodeImport,
+          {
+            disabled: process.env.DOCS_REPO ? true : false, // only works with local filesystem, not remote fetch
+            importBasePath: importBasePath
+          }
+        ],
         [remarkRewriteImages, { destination: process.env.ASSETS_DESTINATION }],
+        remarkInlineLinks,
         [remarkExternalLinks, { target: false, rel: ['nofollow'] }],
         [
           remarkInternalLinks,
           {
-            prefix: DOCS_FOLDER,
-            slug: params.slug,
+            prefix: docsFolder,
+            slug: inlineLinkSlugHelper,
             extensions: ['.mdx', '.md']
           }
         ]
       ]
     },
-    target: ['es2020']
+    target: ['esnext']
   })
 
   const markdownTokens = marked.lexer(content)
@@ -121,10 +151,14 @@ export async function pageProps({ params }) {
   }
 }
 
-export async function staticPaths() {
-  const manifest = await fetchDocsManifest()
+export async function staticPaths(params) {
+  const docsFolder = params?.docsFolder
+    ? params.docsFolder
+    : process.env.DOCS_FOLDER
+
+  const manifest = await fetchDocsManifest(docsFolder)
   const paths = getPaths(manifest.routes)
-  paths.shift() // remove "/docs/README"
-  paths.unshift(`/${process.env.DOCS_FOLDER}`)
+  paths.shift() // remove trailing README
+  paths.unshift(`/${docsFolder}`)
   return paths
 }

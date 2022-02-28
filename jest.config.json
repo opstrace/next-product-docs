@@ -1,5 +1,8 @@
 {
-  "setupFilesAfterEnv": ["./setupTests.js"],
   "collectCoverage": true,
-  "testEnvironment": "jsdom"
+  "testEnvironment": "jsdom",
+  "transformIgnorePatterns": ["/node_modules/(?!(next-mdx-remote))"],
+  "transform": {},
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "mjs"],
+  "verbose": true
 }

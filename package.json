@@ -1,6 +1,6 @@
 {
-  "name": "@opstrace/next-product-docs",
-  "version": "0.0.0-development",
+  "name": "@zentered/next-product-docs",
+  "version": "0.0.114",
   "description": "React/Next.js Render Remote Content",
   "keywords": [
     "nextjs",
@@ -21,21 +21,25 @@
     "Christian Mejlak (https://github.com/C-Mejlak)",
     "Alexander Khvostov (https://github.com/alexanderKhvostov)"
   ],
-  "main": "dist/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./serialize": "./serialize.js"
+  },
   "browser": {
     "fs": false,
     "child_process": false
   },
   "scripts": {
-    "prepare": "husky install",
     "build": "rollup -c rollup.config.js",
-    "watch": "watch 'npm run build' ./src",
-    "style": "prettier --write \"./**/*.{js,jsx,json}\"",
-    "lint": "eslint --fix . --ext .js --ext .jsx --ext md --ext mdx",
-    "test": "jest",
     "postinstall": "husky install",
+    "lint": "eslint --fix . --ext .js --ext .jsx --ext md --ext mdx",
+    "prepare": "husky install",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "postpublish": "pinst --enable",
+    "style": "prettier --write \"./**/*.{js,jsx,json}\"",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "watch": "watch 'npm run build' ./src"
   },
   "commitlint": {
     "extends": [
@@ -50,69 +54,77 @@
       "eslint --cache --fix"
     ]
   },
-  "dependencies": {
-    "@next/mdx": "^12.0.8",
-    "github-slugger": "^1.4.0",
-    "gray-matter": "^4.0.3",
-    "lodash": "^4.17.21",
-    "marked": "^4.0.10",
-    "mdx-observable": "0.2.0",
-    "next-mdx-remote": "^3.0.8",
-    "prism-react-renderer": "1.2.1",
-    "react-click-away-listener": "2.0.5",
-    "react-copy-to-clipboard": "^5.0.4",
-    "react-instantsearch-dom": "^6.21.0",
-    "react-markdown": "^8.0.0",
-    "react-scroll": "^1.8.4",
-    "rehype-autolink-headings": "^6.1.1",
-    "rehype-slug": "^5.0.1",
-    "remark-external-links": "^9.0.1",
-    "remark-gfm": "^3.0.1"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@commitlint/cli": "^16.1.0",
-    "@commitlint/config-conventional": "^16.0.0",
-    "@mdx-js/runtime": "^1.6.22",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "eslint": "^8.7.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jest": "^26.0.0",
-    "eslint-plugin-mdx": "^1.16.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^7.0.4",
-    "jest": "^27.4.7",
-    "lint-staged": "^12.3.1",
-    "next": "^12.0.4",
-    "nock": "^13.2.2",
-    "node-fetch": "^3.2.0",
-    "pinst": "^2.1.6",
-    "pkg-dir": "^5.0.0",
-    "prettier": "^2.5.1",
-    "react": "*",
-    "react-dom": "*",
-    "rollup": "^2.66.0",
-    "watch": "^1.0.2"
-  },
-  "peerDependencies": {
-    "next": "~12.x",
-    "react": "~17.x",
-    "react-dom": "~17.x"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
   "release": {
     "branches": [
       "main"
     ]
+  },
+  "dependencies": {
+    "@next/mdx": "^12.1.0",
+    "github-slugger": "^1.4.0",
+    "gray-matter": "^4.0.3",
+    "lodash": "^4.17.21",
+    "marked": "^4.0.12",
+    "mdast": "^3.0.0",
+    "next-mdx-remote": "^4.0.0",
+    "prism-react-renderer": "1.3.1",
+    "react-click-away-listener": "2.1.0",
+    "react-copy-to-clipboard": "^5.0.4",
+    "react-instantsearch-dom": "^6.22.0",
+    "react-markdown": "^8.0.1",
+    "react-scroll": "^1.8.6",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-sanitize": "^5.0.1",
+    "rehype-slug": "^5.0.1",
+    "remark-external-links": "^9.0.1",
+    "remark-gfm": "^3.0.1",
+    "remark-heading-id": "^1.0.0",
+    "remark-inline-links": "^6.0.1",
+    "strip-indent": "^4.0.0",
+    "unist-util-visit": "^4.1.0",
+    "vfile": "^5.3.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@mdx-js/runtime": "^1.6.22",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "esbuild": "^0.14.27",
+    "esbuild-jest": "^0.5.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.1.2",
+    "eslint-plugin-mdx": "^1.17.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.7",
+    "next": "^12.1.0",
+    "nock": "^13.2.4",
+    "node-fetch": "~3.2.3",
+    "pinst": "^3.0.0",
+    "pkg-dir": "^6.0.1",
+    "prettier": "^2.6.0",
+    "react": "*",
+    "react-dom": "*",
+    "rollup": "^2.70.1",
+    "watch": "^1.0.2"
+  },
+  "peerDependencies": {
+    "next": ">11",
+    "react": ">16",
+    "react-dom": ">16"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

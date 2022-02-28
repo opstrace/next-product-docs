@@ -37,7 +37,7 @@ async function getRawFileFromGitHub(path) {
 async function getRawFileFromFS(path) {
   const { join } = await import('path')
   const { readFileSync } = await import('fs')
-  const rootPath = process.env.DOCS_PATH ? process.env.DOCS_PATH : ''
+  const rootPath = process.env.DOCS_PATH ? process.env.DOCS_PATH : 'content'
   const filePath = join(process.cwd(), rootPath, path)
   return readFileSync(filePath, 'utf8')
 }

@@ -1,7 +1,9 @@
 import { getRawFile } from './files'
 
-const DOCS_FOLDER = process.env.DOCS_FOLDER
 const DOCS_FALLBACK = process.env.DOCS_FALLBACK
+  ? process.env.DOCS_FALLBACK
+  : 'README'
+const DOCS_EXTENSION = process.env.DOCS_USE_MDX === 'true' ? '.mdx' : '.md'
 
 function getDocsSlug(slug) {
   return slug?.length ? slug : [DOCS_FALLBACK]
@@ -13,23 +15,26 @@ function removeFromLast(path, key) {
 }
 
 export function getSlug(params) {
-  const slug = getDocsSlug(params.slug)
-  return { slug: `/docs/${slug.join('/')}` }
+  const slug = getDocsSlug(params.docs)
+  return { slug: `/${slug.join('/')}` }
 }
 
-export async function fetchDocsManifest() {
-  const path = `/${DOCS_FOLDER}/manifest.json`
+export async function fetchDocsManifest(docsFolder) {
+  const path = `/${docsFolder}/manifest.json`
   const res = await getRawFile(path)
   return JSON.parse(res)
 }
 
 export function findRouteByPath(path, routes) {
   for (const route of routes) {
-    if (route.path && removeFromLast(route.path, '.') === path) {
+    if (route.path && removeFromLast(route.path, DOCS_EXTENSION) === path) {
       return route
     } else if (
       route.path &&
-      removeFromLast(route.path, '.').replace(`/${DOCS_FALLBACK}`, '') === path
+      removeFromLast(route.path, DOCS_EXTENSION).replace(
+        `/${DOCS_FALLBACK}`,
+        ''
+      ) === path
     ) {
       return route
     }
@@ -42,9 +47,11 @@ export function getPaths(nextRoutes, carry = []) {
   nextRoutes.forEach(({ path, routes }) => {
     if (path) {
       if (path.indexOf(DOCS_FALLBACK) > -1) {
-        carry.push(removeFromLast(path, '.').replace(`/${DOCS_FALLBACK}`, ''))
+        carry.push(
+          removeFromLast(path, DOCS_EXTENSION).replace(`/${DOCS_FALLBACK}`, '')
+        )
       }
-      carry.push(removeFromLast(path, '.'))
+      carry.push(removeFromLast(path, DOCS_EXTENSION))
     } else if (routes) {
       getPaths(routes, carry)
     }
@@ -56,7 +63,7 @@ export function getPaths(nextRoutes, carry = []) {
 export function replaceDefaultPath(routes) {
   for (const route of routes) {
     if (route.path) {
-      route.path = route.path.split('.')[0]
+      route.path = route.path.split(DOCS_EXTENSION)[0]
       if (route.path.indexOf(DOCS_FALLBACK) > -1) {
         route.path = route.path.replace(DOCS_FALLBACK, '')
         // remove trailing slash
