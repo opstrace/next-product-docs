@@ -139,7 +139,9 @@ export async function pageProps({ params }) {
       return heading
     })
 
-  const title = headings && headings.length > 0 ? headings[0].text : data.title
+  const firstHeadingText =
+    headings && headings.length > 0 ? headings[0].text : ''
+  const title = data.title.length > 0 ? data.title : firstHeadingText
 
   return {
     title,
