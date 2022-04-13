@@ -76,8 +76,8 @@ export default function relativeLinks(options) {
         }
       }
 
-      if (node.url.endsWith('README')) {
-        node.url = node.url.replace('/README', '')
+      if (node.url.includes('README')) {
+        node.url = node.url.replace('README', '')
       }
     }
   }

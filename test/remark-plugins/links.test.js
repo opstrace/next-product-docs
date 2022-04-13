@@ -24,7 +24,7 @@ const cases = [
     ['references', 'faq'],
     '/docs/guides/user/sending-metrics-with-prometheus#remote_write-configuration-block-the-basics'
   ],
-  ['../faq/README.md', ['installation', 'verify'], '/docs/faq'],
+  ['../faq/README.md', ['installation', 'verify'], '/docs/faq/'],
   [
     '#managed-identity-using-aad-pod-identities',
     ['docs', 'configuration', 'acme', 'dns01', 'azuredns'],
@@ -49,6 +49,11 @@ const cases = [
     '#reinstalling-cert-manager',
     ['installation', 'upgrading', 'README', 'README'],
     '/docs/installation/upgrading/#reinstalling-cert-manager'
+  ],
+  [
+    '../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that',
+    ['contributing', 'policy'],
+    '/docs/faq/#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that'
   ]
 ]
 
