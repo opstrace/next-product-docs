@@ -54,11 +54,45 @@ const cases = [
     '../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that',
     ['contributing', 'policy'],
     '/docs/faq/#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that'
+  ],
+  [
+    '../../docs/installation/supported-releases.md',
+    ['installation', 'supported-releases'],
+    '/docs/installation/supported-releases'
+  ],
+  [
+    '../../v1.8-docs/cli/controller.md',
+    ['docs', 'release-notes'],
+    '/v1.8-docs/cli/controller'
   ]
 ]
 
 test.each(cases)('transform %s', (url, slug, expected) => {
   const transform = relativeLinks({ prefix: 'docs', slug: slug })
+  const tree = {
+    type: 'root',
+    children: [
+      {
+        url: url,
+        depth: 1,
+        children: [],
+        position: { start: {}, end: {} },
+        type: 'link',
+        data: { hProperties: {} }
+      }
+    ]
+  }
+  transform(tree)
+  expect(tree.children[0].url).toBe(expected)
+})
+
+test.each(cases)('transform with trailing slash %s', (url, slug, expected) => {
+  expected = expected + '/'
+  const transform = relativeLinks({
+    prefix: 'docs',
+    slug: slug,
+    trailingSlash: true
+  })
   const tree = {
     type: 'root',
     children: [

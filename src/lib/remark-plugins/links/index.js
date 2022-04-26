@@ -30,15 +30,17 @@ export default function relativeLinks(options) {
           pathParts = options.slug
         }
       } else if (options.slug && Array.isArray(options.slug)) {
-        if (options.slug[0] === options.prefix) {
-          options.slug.shift()
-        }
         if (options.slug.length === 1 && options.slug[0] !== 'README') {
           pathParts = options.slug
         } else if (options.slug.length > 1) {
           const depth = (node.url.match(/\.\.\//g) || []).length
-          const removeLast = options.slug.length - depth - 1
-          pathParts = options.slug.slice(0, removeLast)
+          if (depth >= options.slug.length) {
+            options.prefix = ''
+            pathParts = []
+          } else {
+            const removeLast = options.slug.length - depth - 1
+            pathParts = options.slug.slice(0, removeLast)
+          }
         }
       }
 
@@ -63,12 +65,26 @@ export default function relativeLinks(options) {
       }
 
       let path = ''
-      if (pathParts && pathParts.length >= 1) {
-        path = pathParts.join('/')
-        path += '/'
+      if (pathParts) {
+        if (pathParts.length >= 1) {
+          if (pathParts[0] !== options.prefix) {
+            path = options.prefix + '/' + pathParts.join('/')
+          } else {
+            path = pathParts.join('/')
+          }
+          path += '/'
+        } else {
+          if (options.prefix) {
+            path = options.prefix + '/'
+          }
+        }
       }
 
-      node.url = `/${options.prefix}/${path}${node.url}`
+      node.url = `/${path}${node.url}`
+
+      if (options.trailingSlash === true && !node.url.endsWith('/')) {
+        node.url += '/'
+      }
 
       for (const ext of options.extensions) {
         if (node.url.includes(ext)) {
