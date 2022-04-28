@@ -31,6 +31,7 @@ export async function pageProps({ params }) {
   const docsFolder = params.docsFolder
     ? params.docsFolder
     : process.env.DOCS_FOLDER
+  const trailingSlash = params.trailingSlash || false
 
   const slugger = new GithubSlugger()
   const manifest = await fetchDocsManifest(docsFolder).catch((error) => {
@@ -123,7 +124,8 @@ export async function pageProps({ params }) {
           {
             prefix: docsFolder,
             slug: inlineLinkSlugHelper,
-            extensions: ['.mdx', '.md']
+            extensions: ['.mdx', '.md'],
+            trailingSlash: trailingSlash
           }
         ]
       ]

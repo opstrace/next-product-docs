@@ -1,55 +1,54 @@
 import { visit } from 'unist-util-visit'
 
 export default function relativeLinks(options) {
-  let pathParts = []
   if (!options || !options.prefix) {
     throw Error('Missing required "prefix" option')
   }
 
-  if (!options.extensions) {
-    options.extensions = ['.mdx', '.md']
+  let pathParts = []
+  let extensions = ['.mdx', '.md']
+  const slug = options.slug
+
+  if (options.extensions) {
+    extensions = options.extensions
   }
 
   function visitor(node) {
+    let nodePrefix = options.prefix
     if (node && node.url && !node.url.startsWith('http')) {
+      if (process.env.DEBUG === 'true') {
+        // helps to identify "special cases" and add those to the tests
+        console.log(node.url, options)
+      }
+
       // ignore mailto: links
       if (node.url.startsWith('mailto:')) {
         return
       }
 
-      // this helps to debug special cases
-      // console.log(node, options)
-
       const isTargetLink = node.url.startsWith('#')
 
       // handle relative paths
       if (isTargetLink) {
-        if (options.slug[0] === options.prefix) {
-          pathParts = options.slug.slice(1)
+        if (slug[0] === nodePrefix) {
+          pathParts = slug.slice(1)
         } else {
-          pathParts = options.slug
+          pathParts = slug
         }
-      } else if (options.slug && Array.isArray(options.slug)) {
-        if (options.slug.length === 1 && options.slug[0] !== 'README') {
-          pathParts = options.slug
-        } else if (options.slug.length > 1) {
-          const depth = (node.url.match(/\.\.\//g) || []).length
-          if (depth >= options.slug.length) {
-            options.prefix = ''
-            pathParts = []
-          } else {
-            const removeLast = options.slug.length - depth - 1
-            pathParts = options.slug.slice(0, removeLast)
-          }
+      } else if (slug && Array.isArray(slug)) {
+        if (slug[0] === nodePrefix) {
+          slug.shift()
         }
-      }
-
-      if (pathParts[pathParts.length - 1] === 'README') {
-        pathParts.pop()
-      }
-      // special case for links followed by "the muffet", as they sometimes have README twice in the path
-      if (pathParts[pathParts.length - 1] === 'README') {
-        pathParts.pop()
+        const depth = (node.url.match(/\.\.\//g) || []).length
+        if (slug.length <= 1) {
+          pathParts = slug
+        } else if (depth >= slug.length) {
+          nodePrefix = ''
+          pathParts = []
+        } else {
+          const removeLast = slug.length - depth - 1
+          pathParts = slug.slice(0, removeLast)
+        }
       }
 
       if (node.url.startsWith('/')) {
@@ -67,15 +66,13 @@ export default function relativeLinks(options) {
       let path = ''
       if (pathParts) {
         if (pathParts.length >= 1) {
-          if (pathParts[0] !== options.prefix) {
-            path = options.prefix + '/' + pathParts.join('/')
-          } else {
-            path = pathParts.join('/')
+          if (pathParts[0] !== nodePrefix) {
+            path = nodePrefix + '/' + pathParts.join('/')
           }
           path += '/'
         } else {
-          if (options.prefix) {
-            path = options.prefix + '/'
+          if (nodePrefix) {
+            path = nodePrefix + '/'
           }
         }
       }
@@ -86,7 +83,7 @@ export default function relativeLinks(options) {
         node.url += '/'
       }
 
-      for (const ext of options.extensions) {
+      for (const ext of extensions) {
         if (node.url.includes(ext)) {
           node.url = node.url.replace(ext, '')
         }
