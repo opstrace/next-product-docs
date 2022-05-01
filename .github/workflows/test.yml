@@ -24,7 +24,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Lint Code Base
-        uses: github/super-linter@v3.17.1
+        uses: github/super-linter@v4.9.2
         env:
           LINTER_RULES_PATH: /
           LOG_LEVEL: 'WARN'
