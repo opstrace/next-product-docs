@@ -62,7 +62,7 @@
     "mdx-observable": "0.2.0",
     "next-mdx-remote": "^3.0.4",
     "prism-react-renderer": "1.2.1",
-    "react-click-away-listener": "2.0.3",
+    "react-click-away-listener": "2.2.1",
     "react-copy-to-clipboard": "^5.0.3",
     "react-instantsearch-dom": "^6.12.1",
     "react-markdown": "^6.0.3",
