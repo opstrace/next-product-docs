@@ -26,10 +26,8 @@ export default function relativeLinks(options) {
         return
       }
 
-      const isTargetLink = node.url.startsWith('#')
-
       // handle relative paths
-      if (isTargetLink) {
+      if (node.url.startsWith('#')) {
         if (slug[0] === nodePrefix) {
           pathParts = slug.slice(1)
         } else {
@@ -79,7 +77,9 @@ export default function relativeLinks(options) {
 
       node.url = `/${path}${node.url}`
 
-      if (options.trailingSlash === true && !node.url.endsWith('/')) {
+      if (options.trailingSlash && node.url.includes('#')) {
+        node.url = node.url.replace('#', '/#')
+      } else if (options.trailingSlash === true && !node.url.endsWith('/')) {
         node.url += '/'
       }
 

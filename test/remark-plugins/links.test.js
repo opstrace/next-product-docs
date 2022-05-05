@@ -128,6 +128,20 @@ const cases = [
     prefix: 'v1.8-docs',
     slug: ['installation', 'helm'],
     expected: '/v1.8-docs/installation/compatibility'
+  },
+  {
+    url: 'ingress.md#supported-annotation',
+    prefix: 'docs',
+    slug: ['usage', 'gateway'],
+    options: { trailingSlash: true },
+    expected: '/docs/usage/ingress/#supported-annotation'
+  },
+  {
+    url: './ingress.md#supported-annotation',
+    prefix: 'docs',
+    slug: ['usage', 'gateway'],
+    options: { trailingSlash: true },
+    expected: '/docs/usage/ingress/#supported-annotation'
   }
 ]
 
