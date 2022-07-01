@@ -101,8 +101,8 @@
     "react": "*",
     "react-dom": "*",
     "rollup": "^2.56.2",
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^22.0.0",
+    "stylelint": "^14.9.1",
+    "stylelint-config-standard": "^26.0.0",
     "watch": "^1.0.2"
   },
   "peerDependencies": {
