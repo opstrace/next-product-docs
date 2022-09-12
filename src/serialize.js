@@ -38,6 +38,7 @@ export async function pageProps({ params }) {
     if (error.status === 404) return
     throw error
   })
+
   const { slug } = getSlug(params)
   const route = manifest && findRouteByPath(slug, manifest.routes)
   if (!route)

@@ -15,7 +15,8 @@ function removeFromLast(path, key) {
 }
 
 export function getSlug(params) {
-  const slug = getDocsSlug(params.docs)
+  const paths = params.docs ? params.docs : params.slug
+  const slug = getDocsSlug(paths)
   return { slug: `/${slug.join('/')}` }
 }
 

@@ -8,20 +8,24 @@ import { Element } from 'react-scroll'
 import CodeBlock from './components/CodeBlock.jsx'
 import InlineCode from './components/InlineCode.jsx'
 
-export function Documentation({ source, theme }) {
-  const components = {
-    Element: ({ name, ...props }) => {
-      return (
-        <Element
-          // remove name from parent div
-          name={props.children[0]?.props?.id === name ? null : name}
-          {...props}
-        />
-      )
+export function Documentation({ source, theme, additionalComponents = {} }) {
+  const components = Object.assign(
+    {
+      Element: ({ name, ...props }) => {
+        return (
+          <Element
+            // remove name from parent div
+            name={props.children[0]?.props?.id === name ? null : name}
+            {...props}
+          />
+        )
+      },
+      pre: (props) => <CodeBlock {...props} theme={theme} />,
+      code: (props) => <InlineCode {...props} theme={theme} />
     },
-    pre: (props) => <CodeBlock {...props} theme={theme} />,
-    code: (props) => <InlineCode {...props} theme={theme} />
-  }
+    additionalComponents
+  )
+  console.log(components)
 
   return <MDXRemote {...source} components={components} theme={theme} />
 }
