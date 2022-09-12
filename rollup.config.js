@@ -15,7 +15,6 @@ export default [
     external: [
       'react',
       'next-mdx-remote',
-      'react-scroll',
       'react-copy-to-clipboard',
       'fs',
       'path'

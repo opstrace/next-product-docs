@@ -9,5 +9,4 @@ setupTests.js
 assets
 .husky
 .stylelintrc.json
-jest.config.json  
 rollup.config.js  

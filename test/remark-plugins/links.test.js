@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import relativeLinks from '../../src/lib/remark-plugins/links/index'
 
 const cases = [

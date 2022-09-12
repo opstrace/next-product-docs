@@ -1,8 +1,0 @@
-{
-  "collectCoverage": true,
-  "testEnvironment": "jsdom",
-  "transformIgnorePatterns": ["/node_modules/(?!(next-mdx-remote))"],
-  "transform": {},
-  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "mjs"],
-  "verbose": true
-}

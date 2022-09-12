@@ -3,13 +3,12 @@ import matter from 'gray-matter'
 import { marked } from 'marked'
 import GithubSlugger from 'github-slugger'
 import rehypeSlug from 'rehype-slug'
-// import rehypeSanitize from 'rehype-sanitize'
 import rehypeAutolink from 'rehype-autolink-headings'
 import cloneDeep from 'lodash/cloneDeep'
 
 import { codeImport as remarkCodeImport } from './lib/remark-plugins/import'
 import remarkInlineLinks from 'remark-inline-links'
-// import remarkHeadingId from './lib/remark-plugins/heading-ids'
+import remarkHeadingId from './lib/remark-plugins/heading-ids'
 // TODO: plugins require some refactoring, see https://github.com/storybookjs/storybook/issues/9602 for inspiration/guidance
 // import remarkTabs from './lib/remark-plugins/tabs'
 // import remarkState from './lib/remark-plugins/state'
@@ -105,7 +104,7 @@ export async function pageProps({ params }) {
         ]
       ],
       remarkPlugins: [
-        // remarkHeadingId,
+        remarkHeadingId,
         // remarkSections,
         // remarkTabs,
         // remarkState,

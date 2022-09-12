@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote'
 // import { State, Observe } from 'mdx-observable'
 // import Tabs, { Tab } from './components/Tabs.jsx'
 // import Interpolate from './components/Interpolate.jsx'
-import { Element } from 'react-scroll'
+import * as Scroll from 'react-scroll'
 import CodeBlock from './components/CodeBlock.jsx'
 import InlineCode from './components/InlineCode.jsx'
 
@@ -13,7 +13,7 @@ export function Documentation({ source, theme, additionalComponents = {} }) {
     {
       Element: ({ name, ...props }) => {
         return (
-          <Element
+          <Scroll.Element
             // remove name from parent div
             name={props.children[0]?.props?.id === name ? null : name}
             {...props}

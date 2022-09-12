@@ -7,17 +7,12 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true,
-    "jest": true
-  },
-  "globals": {
-    "jest": true
+    "node": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:mdx/recommended",
-    "plugin:jest/recommended",
     "plugin:react-hooks/recommended"
   ],
   "parserOptions": {
