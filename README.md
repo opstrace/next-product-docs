@@ -68,11 +68,11 @@ or check out the
 
 In your Next.js website repo, run:
 
-    yarn add @opstrace/next-product-docs
+    npm install @zentered/next-product-docs
 
 or
 
-    npm install @opstrace/next-product-docs
+    yarn add @zentered/next-product-docs
 
 The location of your product docs can be configured through environment
 variables in your `.env` file. There are two possible ways to retrieve docs:
@@ -137,13 +137,21 @@ export async function getStaticProps(ctx) {
 
 # Run Locally
 
-```bash
-    npm run watch
-    # or yarn watch
-```
+## Setup
 
-Read how to link component in
-[next-product-docs-example](https://github.com/zentered/next-product-docs-example)
+```bash
+    # build dist folder
+    pnpm build
+
+    # create system-wide link to project folder
+    pnpm link .
+
+    # in the website/next project folder
+    pnpm link @zentered/next-product-docs
+
+    # for continous monitoring
+    pnpm watch
+```
 
 ## Additional Components
 
@@ -184,7 +192,7 @@ on how to link/unlink the component in a Next.js project.
 Please join us for
 [discussions in our community](https://go.opstrace.com/community).
 
-You can also ping us on Twitter [@opstrace](http://twitter.com/opstrace) or
+You can also ping us on Twitter [@zentered](http://twitter.com/opstrace) or
 [@zenteredco](http://twitter.com/zenteredco). The only workaround we have at the
 moment is forking the repository, publish new package versions to GitHub and
 install them in the Next.js project where we use the component.
