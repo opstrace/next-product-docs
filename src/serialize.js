@@ -39,7 +39,11 @@ export async function pageProps({ params }) {
   })
 
   const { slug } = getSlug(params)
-  const route = manifest && findRouteByPath(slug, manifest.routes)
+
+  const pathPrefix = process.env.DOCS_FOLDER
+    ? `/${process.env.DOCS_FOLDER}`
+    : ''
+  const route = manifest && findRouteByPath(pathPrefix + slug, manifest.routes)
   if (!route)
     return {
       notFound: true
