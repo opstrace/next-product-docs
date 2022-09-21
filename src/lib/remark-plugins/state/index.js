@@ -1,17 +1,28 @@
+const COMMENT_LABEL = 'export-to-input'
+
+const isClosingComment = (child) => {
+  return (
+    child.type === 'comment' && child.commentValue.trim().includes(`/${COMMENT_LABEL}`)
+  )
+}
+
+const isOpeningComment = (child) => {
+
+  return (
+    child.type === 'comment' && child.commentValue.trim().includes(COMMENT_LABEL)
+  )
+}
+
 function findVarsToSub(children) {
   const varsToSub = []
 
   const updatedChildren = children.reduce((arr, child) => {
-    const isClosingInputComment =
-      child.type === 'comment' &&
-      child.value.trim().includes('/export-to-input')
+    const isClosingInputComment = isClosingComment(child)
 
     if (isClosingInputComment) {
       // find opening comment
       const numberOfElementsToRemove = [...arr].reverse().findIndex((c) => {
-        return (
-          c.type === 'comment' && c.value.trim().includes('export-to-input')
-        )
+        return isOpeningComment(c)
       })
 
       const arrWithoutComment = arr.slice(0, -numberOfElementsToRemove)

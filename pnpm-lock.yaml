@@ -5,6 +5,7 @@ specifiers:
   '@babel/preset-react': ^7.18.6
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
+  '@mdx-js/mdx': ^2.1.3
   '@mdx-js/runtime': ^1.6.22
   '@next/mdx': ^12.3.0
   '@rollup/plugin-babel': ^5.3.1
@@ -47,10 +48,12 @@ specifiers:
   rehype-autolink-headings: ^6.1.1
   rehype-sanitize: ^5.0.1
   rehype-slug: ^5.0.1
+  remark-comment: ^1.0.0
   remark-external-links: ^9.0.1
   remark-gfm: ^3.0.1
   remark-heading-id: ^1.0.0
   remark-inline-links: ^6.0.1
+  remark-parse: ^10.0.1
   rollup: ^2.79.0
   strip-indent: ^4.0.0
   unist-util-visit: ^4.1.1
@@ -60,6 +63,7 @@ specifiers:
   whatwg-fetch: ^3.6.2
 
 dependencies:
+  '@mdx-js/mdx': 2.1.3
   '@next/mdx': 12.3.0
   github-slugger: 1.4.0
   gray-matter: 4.0.3
@@ -76,10 +80,12 @@ dependencies:
   rehype-autolink-headings: 6.1.1
   rehype-sanitize: 5.0.1
   rehype-slug: 5.0.1
+  remark-comment: 1.0.0
   remark-external-links: 9.0.1
   remark-gfm: 3.0.1
   remark-heading-id: 1.0.0
   remark-inline-links: 6.0.1
+  remark-parse: 10.0.1
   strip-indent: 4.0.0
   unist-util-visit: 4.1.1
   vfile: 5.3.5
@@ -6405,6 +6411,14 @@ packages:
       hast-util-to-string: 2.0.0
       unified: 10.1.2
       unist-util-visit: 4.1.1
+    dev: false
+
+  /remark-comment/1.0.0:
+    resolution: {integrity: sha512-k8YPo5MGvl8l4gGxOH6Zk4Fa2AhDACN5eqKnKZcHDORZQS15hlnezlBHj2lqyDiqzApNmYOMTibkEJbMSKU25w==}
+    dependencies:
+      micromark-factory-space: 1.0.0
+      micromark-util-character: 1.1.0
+      micromark-util-symbol: 1.0.1
     dev: false
 
   /remark-external-links/9.0.1:

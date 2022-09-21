@@ -2,6 +2,22 @@
 
 exports[`Document > should render 1`] = `
 <div>
+  &lt;State initialstate={
+      {
+        
+      }
+    }&gt;
+  
+
+  {({setState: setSubstitutionState, ...substitutionState}) =&gt; (
+  
+
+  &lt;&gt;
+  
+
+  &lt;Interpolate substitutions={substitutionState}&gt;
+  
+
   <hr />
   
 
@@ -117,5 +133,17 @@ exports[`Document > should render 1`] = `
   <p>
     Second Paragraph.
   </p>
+  
+
+  &lt;/Interpolate&gt;
+  
+
+  &lt;/&gt;
+  
+
+  )}
+  
+
+  &lt;/State&gt;
 </div>
 `;

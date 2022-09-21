@@ -11,7 +11,7 @@ import remarkInlineLinks from 'remark-inline-links'
 import remarkHeadingId from './lib/remark-plugins/heading-ids'
 // TODO: plugins require some refactoring, see https://github.com/storybookjs/storybook/issues/9602 for inspiration/guidance
 // import remarkTabs from './lib/remark-plugins/tabs'
-// import remarkState from './lib/remark-plugins/state'
+import remarkState from './lib/remark-plugins/state'
 // import remarkSections from './lib/remark-plugins/sections'
 import remarkGfm from 'remark-gfm'
 import remarkExternalLinks from 'remark-external-links'
@@ -111,7 +111,7 @@ export async function pageProps({ params }) {
         remarkHeadingId,
         // remarkSections,
         // remarkTabs,
-        // remarkState,
+        remarkState,
         remarkGfm,
         [
           remarkCodeImport,
